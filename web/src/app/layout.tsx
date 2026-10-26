@@ -1,0 +1,29 @@
+import { Inter } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Toaster } from "sonner";
+import "./globals.css";
+// eslint-disable  MC8yOmFIVnBZMlhsdktEbXRLcmxqWm82WlVKMU53PT06ZjQ0NDE5MjY=
+
+const inter = Inter({ subsets: ["latin"] });
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html
+      lang="zh-CN"
+      suppressHydrationWarning
+    >
+      <body
+        className={inter.className}
+        suppressHydrationWarning
+      >
+        <NuqsAdapter>{children}</NuqsAdapter>
+        <Toaster />
+      </body>
+    </html>
+  );
+}
+// FIXME  MS8yOmFIVnBZMlhsdktEbXRLcmxqWm82WlVKMU53PT06ZjQ0NDE5MjY=

@@ -1,0 +1,23 @@
+# ===== 敏感信息 / 密钥（严禁提交）=====
+.env
+.env.*
+!.env.example
+
+# 硬编码了 Tavily API key 的示例文件（先把 key 改成环境变量再提交，然后可删除本行）
+examples/mcp/HTTP_demo.py
+
+# ===== Python =====
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ===== LangGraph 运行时产物 =====
+.langgraph_api/
+
+# ===== IDE =====
+.idea/
+
+# ===== 前端 =====
+node_modules/
+.next/

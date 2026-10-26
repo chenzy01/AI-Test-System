@@ -1,0 +1,15 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "study_agent": {
+      "path": "./examples/langchain_demo/agent_demo.py:study_agent"
+    },
+    "test_case_agent_1": {
+      "path": "./src/agents/test_case_agent_1.py:test_case_agent"
+    },
+    "deep_agent": {
+      "path": "./examples/deepagents_demo/deep_demo.py:agent"
+    }
+  },
+  "env": ".env"
+}

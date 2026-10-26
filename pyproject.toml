@@ -1,0 +1,22 @@
+[project]
+name = "czy-ai-system"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "deepagents>=0.7.32",
+    "docling-mcp[local]>=2.2.1",
+    "fastmcp>=3.4.7",
+    "langchain>=1.3.16",
+    "langchain-community>=0.4.2",
+    "langchain-deepseek>=1.1.0",
+    "langchain-mcp-adapters>=0.3.2",
+    "langchain-pymupdf4llm>=1.28.0",
+    "langgraph-cli[inmem]>=0.4.31",
+    "python-dotenv>=1.2.3",
+    "zai-sdk>=0.2.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

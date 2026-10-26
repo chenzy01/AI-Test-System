@@ -1,0 +1,142 @@
+- generic [ref=e3]:
+  - generic:
+    - generic:
+      - generic [ref=e6]:
+        - generic [ref=e7]:
+          - link "新闻" [ref=e8] [cursor=pointer]:
+            - /url: http://news.baidu.com
+          - link "hao123" [ref=e9] [cursor=pointer]:
+            - /url: https://www.hao123.com?src=from_pc
+          - link "地图" [ref=e10] [cursor=pointer]:
+            - /url: http://map.baidu.com
+          - link "贴吧" [ref=e11] [cursor=pointer]:
+            - /url: http://tieba.baidu.com/
+          - link "视频" [ref=e12] [cursor=pointer]:
+            - /url: https://haokan.baidu.com/?sfrom=baidu-top
+          - link "图片" [ref=e13] [cursor=pointer]:
+            - /url: http://image.baidu.com/
+          - link "网盘" [ref=e14] [cursor=pointer]:
+            - /url: https://pan.baidu.com?from=1026962h
+          - link "库库AI" [ref=e15] [cursor=pointer]:
+            - /url: https://kuku.baidu.com/app?utm_source=baidu
+          - link "文心" [ref=e16] [cursor=pointer]:
+            - /url: https://chat.baidu.com/search?isShowHello=1&pd=csaitab&setype=csaitab&extParamsJson=%7B%22enter_type%22%3A%22home_tab%22%7D
+          - link "百度搭子" [ref=e17] [cursor=pointer]:
+            - /url: https://dumate.baidu.com/app/login-bridge?track=1063479e
+        - generic [ref=e18]:
+          - link "更多" [ref=e19] [cursor=pointer]:
+            - /url: http://www.baidu.com/more/
+          - text: 
+      - generic [ref=e20]:
+        - generic [ref=e21] [cursor=pointer]: 设置
+        - link "登录" [ref=e22] [cursor=pointer]:
+          - /url: https://passport.baidu.com/v2/?login&tpl=mn&u=http%3A%2F%2Fwww.baidu.com%2F&sms=5
+  - generic [ref=e25]:
+    - generic [ref=e26]:
+      - generic:
+        - link "点击一下，了解更多":
+          - /url: //www.baidu.com/s?wd=%E7%99%BE%E5%BA%A6%E7%83%AD%E6%90%9C&sa=ire_dl_gh_logo_texing&rsv_dl=igh_logo_pcs
+    - generic [ref=e32]:
+      - generic [ref=e35]:
+        - textbox "马珊珊任沈阳市委副书记" [active] [ref=e37]
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e42] [cursor=pointer]
+            - generic [ref=e53] [cursor=pointer]
+          - button "百度一下" [ref=e58] [cursor=pointer]
+      - link "复杂问题就找文心助手，深入思考回答更优 " [ref=e62] [cursor=pointer]:
+        - /url: https://wenxin.baidu.com/?extParams=%7B%22enter_type%22%3A%22home_operate%22%7D
+        - generic [ref=e64]:
+          - generic [ref=e65]: 复杂问题就找文心助手，深入思考回答更优
+          - generic [ref=e66]: 
+    - generic [ref=e67]:
+      - generic [ref=e68]:
+        - link "百度热搜":
+          - /url: https://top.baidu.com/board?platform=pc&sa=pcindex_entry
+          - generic "百度热搜" [ref=e69] [cursor=pointer]: 
+        - generic [ref=e70] [cursor=pointer]:
+          - generic [ref=e71]: 
+          - text: 换一换
+      - list:
+        - listitem [ref=e72]:
+          - link " 2027 金砖相约中国" [ref=e73] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=2027+%E9%87%91%E7%A0%96%E7%9B%B8%E7%BA%A6%E4%B8%AD%E5%9B%BD&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e74]: 
+            - text: 2027 金砖相约中国
+        - listitem [ref=e76]:
+          - link "5 双胞胎姐妹出生差1分高考差1分" [ref=e77] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%8F%8C%E8%83%9E%E8%83%8E%E5%A7%90%E5%A6%B9%E5%87%BA%E7%94%9F%E5%B7%AE1%E5%88%86%E9%AB%98%E8%80%83%E5%B7%AE1%E5%88%86&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e78]: "5"
+            - text: 双胞胎姐妹出生差1分高考差1分
+          - generic [ref=e79]: 新
+        - listitem [ref=e80]:
+          - link "1 下周上班时间有变" [ref=e81] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%B8%8B%E5%91%A8%E4%B8%8A%E7%8F%AD%E6%97%B6%E9%97%B4%E6%9C%89%E5%8F%98&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e82]: "1"
+            - text: 下周上班时间有变
+          - generic [ref=e83]: 热
+        - listitem [ref=e84]:
+          - link "6 iPhone Duo炒到9万 黄牛贷款欲囤货" [ref=e85] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=iPhone+Duo%E7%82%92%E5%88%B09%E4%B8%87+%E9%BB%84%E7%89%9B%E8%B4%B7%E6%AC%BE%E6%AC%B2%E5%9B%A4%E8%B4%A7&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e86]: "6"
+            - text: iPhone Duo炒到9万 黄牛贷款欲囤货
+          - generic [ref=e87]: 热
+        - listitem [ref=e88]:
+          - link "2 地库接连躺人司机躲过一个又一个" [ref=e89] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%9C%B0%E5%BA%93%E6%8E%A5%E8%BF%9E%E8%BA%BA%E4%BA%BA%E5%8F%B8%E6%9C%BA%E8%BA%B2%E8%BF%87%E4%B8%80%E4%B8%AA%E5%8F%88%E4%B8%80%E4%B8%AA&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e90]: "2"
+            - text: 地库接连躺人司机躲过一个又一个
+          - generic [ref=e91]: 热
+        - listitem [ref=e92]:
+          - link "7 警方通报公职人员醉驾致五旬夫妻身亡" [ref=e93] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E8%AD%A6%E6%96%B9%E9%80%9A%E6%8A%A5%E5%85%AC%E8%81%8C%E4%BA%BA%E5%91%98%E9%86%89%E9%A9%BE%E8%87%B4%E4%BA%94%E6%97%AC%E5%A4%AB%E5%A6%BB%E8%BA%AB%E4%BA%A1&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e94]: "7"
+            - text: 警方通报公职人员醉驾致五旬夫妻身亡
+        - listitem [ref=e96]:
+          - link "3 中国在金砖机制中发挥非常重要作用" [ref=e97] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%B8%AD%E5%9B%BD%E5%9C%A8%E9%87%91%E7%A0%96%E6%9C%BA%E5%88%B6%E4%B8%AD%E5%8F%91%E6%8C%A5%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%E4%BD%9C%E7%94%A8&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e98]: "3"
+            - text: 中国在金砖机制中发挥非常重要作用
+        - listitem [ref=e100]:
+          - link "8 丁俊晖止步英格兰公开赛四强" [ref=e101] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E4%B8%81%E4%BF%8A%E6%99%96%E6%AD%A2%E6%AD%A5%E8%8B%B1%E6%A0%BC%E5%85%B0%E5%85%AC%E5%BC%80%E8%B5%9B%E5%9B%9B%E5%BC%BA&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e102]: "8"
+            - text: 丁俊晖止步英格兰公开赛四强
+          - generic [ref=e103]: 新
+        - listitem [ref=e104]:
+          - link "4 1300张票1000张黄牛 罗永浩吐槽" [ref=e105] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=1300%E5%BC%A0%E7%A5%A81000%E5%BC%A0%E9%BB%84%E7%89%9B+%E7%BD%97%E6%B0%B8%E6%B5%A9%E5%90%90%E6%A7%BD&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e106]: "4"
+            - text: 1300张票1000张黄牛 罗永浩吐槽
+          - generic [ref=e107]: 热
+        - listitem [ref=e108]:
+          - link "9 多地小学改为养老院" [ref=e109] [cursor=pointer]:
+            - /url: https://www.baidu.com/s?wd=%E5%A4%9A%E5%9C%B0%E5%B0%8F%E5%AD%A6%E6%94%B9%E4%B8%BA%E5%85%BB%E8%80%81%E9%99%A2&sa=fyb_n_homepage&rsv_dl=fyb_n_homepage&from=super&cl=3&tn=baidutop10&fr=top1000&rsv_idx=2&hisfilter=1
+            - generic [ref=e110]: "9"
+            - text: 多地小学改为养老院
+          - generic [ref=e111]: 热
+  - generic [ref=e113]:
+    - paragraph [ref=e114]:
+      - link "关于百度" [ref=e115] [cursor=pointer]:
+        - /url: //home.baidu.com
+    - paragraph [ref=e116]:
+      - link "About Baidu" [ref=e117] [cursor=pointer]:
+        - /url: http://ir.baidu.com
+    - paragraph [ref=e118]:
+      - link "使用百度前必读" [ref=e119] [cursor=pointer]:
+        - /url: //www.baidu.com/duty
+    - paragraph [ref=e120]:
+      - link "帮助中心" [ref=e121] [cursor=pointer]:
+        - /url: https://help.baidu.com/question?prod_id=1
+    - paragraph [ref=e122]:
+      - link "企业推广" [ref=e123] [cursor=pointer]:
+        - /url: https://e.baidu.com/?refer=1271
+    - paragraph [ref=e124]:
+      - link "京公网安备11010802050023号" [ref=e125] [cursor=pointer]:
+        - /url: https://beian.mps.gov.cn/#/query/webSearch?code=11010802050023
+    - paragraph [ref=e126]:
+      - link "京ICP证030173号" [ref=e127] [cursor=pointer]:
+        - /url: https://beian.miit.gov.cn
+    - paragraph [ref=e128]: 互联网新闻信息服务许可证11220180008
+    - generic [ref=e129]: 
+    - generic [ref=e130]: 
