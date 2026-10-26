@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-「kk AI测试平台」—— 基于 LangChain/LangGraph 的 AI 智能体系统，核心能力是让智能体通过 MCP 工具解析需求/设计/接口文档，自动生成测试用例。
+「CZY AI 测试平台」—— 基于 LangChain/LangGraph 的 AI 智能体系统，核心能力是让智能体通过 MCP 工具解析需求/设计/接口文档，自动生成测试用例。
 
 - 后端：Python 3.12+，LangChain 1.x + LangGraph + DeepSeek，用 uv 管理依赖（`pyproject.toml` / `uv.lock`）。
 - 前端：`web/` 是 Next.js 16 + React 19 的聊天 UI，从 langchain-ai/deep-agents-ui fork 而来（"Deep Agents UI"），通过 `@langchain/langgraph-sdk` 连接 LangGraph 部署。
