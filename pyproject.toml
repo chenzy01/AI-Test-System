@@ -12,6 +12,7 @@ dependencies = [
     "langchain-mcp-adapters>=0.3.2",
     "langchain-pymupdf4llm>=1.28.0",
     "langgraph-cli[inmem]>=0.4.31",
+    "pypdf>=6.21.3",
     "python-dotenv>=1.2.3",
     "zai-sdk>=0.2.3",
 ]

@@ -21,3 +21,6 @@ __pycache__/
 # ===== 前端 =====
 node_modules/
 .next/
+
+# ==== docs,冗余文档 =====
+.docs/

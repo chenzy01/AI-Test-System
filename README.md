@@ -1596,6 +1596,129 @@ skill
 > 
 > 
 
+## 六
+
+### RAG 检索增强生成 Retrieval Augmented Generation
+
+用户向大模型提问题，RAG根据用户问题相关性输出内容，将用户和输出的文档内容一并发给大模型，大模型再根据文档推理、总结后再发给用户。
+
+假如前端上传的文档过大，是有几十页的PDF文档，需要的信息可能只是其中几页，后端该如何处理。
+
+解决方案：多模态 RAG 系统
+
+解决问题：
+
+1\.大模型的知识有限，并不是最新的
+
+2\.依据指定文档回答问题，幻觉率低
+
+
+
+### RAG的工作过程
+
+1\.检索
+
+- 用户输入问题：这个月公司销售额是多少
+
+- 处理：将问题转化为相似性向量\-\-\>查询向量
+
+- 动作：在知识库中根据相似性搜索相关内容
+
+2\.增强
+
+- 将查询到的相关内容和原生问题一起发送给大模型
+
+3\.生成
+
+- 大模型根据RAG发送的资料进行推理，总结，将答案发送给用户
+
+
+
+### 工作原理
+
+1\.文档解析：把原始文档数据解析成系统可识别的文档 （Document 对象，使用文档加载器）（难点：文档格式多样化，大小不一）
+
+2\.文档切分：先通过切分器分成多个文本块（Chunk） documents \-\> Chunk
+
+3\.嵌入计算：通过**嵌入模型**转化为向量数据。\[0\.123,0\.334,0\.2341\.\.\.\] 有多少维度是嵌入模型决定的
+
+4\.存储到向量数据库（本地/远程）
+
+---
+
+构建知识库部分
+
+5\.用户提问（使用到的嵌入模型与第3步是一样的）：嵌入模型把用户的问题也转化为向量数据
+
+6\.检索/召回：去向量数据库中做语义相似性检查，搜索，找到/召回 相关 chunk
+
+7\.增强：把召回的chunk和问题，注入提示词中，一起发给大模型
+
+8\.生成：大模型处理后返回给用户答案
+
+![deepseek\_mermaid\_20261027\_62defb\.png](图片和附件/deepseek_mermaid_20261027_62defb.png)
+
+
+
+文档解析
+
+使用 langchain，具体第三方库 langchain\_community 实现
+
+> 加载txt 文档
+> 
+> from langchain\_community\.document\_loaders import TextLoader
+> 
+> file\_path = "tester\.txt"
+> 
+> encoding = "utf\-8"
+> 
+> /\# txt 文档，无论文档有多长，都只会有一个Document对象
+> 
+> docs = TextLoader\(file\_path, encoding\)\.load\(\)
+> 
+> print\(docs\)
+> 
+> 
+
+Document 对象中两个重要字段：
+
+metadata：保存与文档无关的数据
+
+page\_content：文档的原始数据
+
+![image\.png](图片和附件/image%205.png)
+
+
+
+加载pdf 文档
+
+> from langchain\_community\.document\_loaders import PyPDFLoader
+> 
+> docs = PyPDFLoader\(
+> 
+> file\_path="电商平台购物车功能需求文档（精简版）\.pdf",
+> 
+> extraction\_mode="plain"  \# plain 提取文本，layout 按布局提取
+> 
+> \)\.load\(\)
+> 
+> 
+> 
+> print\(docs\)
+> 
+> 
+
+Pdf 文档有几页，解析后就有几个Document 对象。它只能解析文本文档，若PDF中带有图片或流程图，这些信息是解析不了
+
+![image\.png](图片和附件/image%203.png)
+
+
+
+![image\.png](图片和附件/image%201.png)
+
+Langchain 在 初始化时，在 \_module\_lookup 中定义了各种解析器，其它还有CSV，JSON\.\.\.
+
+![image\.png](图片和附件/image%2012.png)
 
 
 
