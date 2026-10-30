@@ -3,6 +3,7 @@ name = "czy-ai-system"
 version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
+    "dashscope>=2.0.2",
     "deepagents>=0.7.32",
     "docling-mcp[local]>=2.2.1",
     "fastmcp>=3.4.7",
@@ -10,7 +11,9 @@ dependencies = [
     "langchain-community>=0.4.2",
     "langchain-deepseek>=1.1.0",
     "langchain-mcp-adapters>=0.3.2",
+    "langchain-ollama>=1.1.0",
     "langchain-pymupdf4llm>=1.28.0",
+    "langchain-redis>=0.2.6",
     "langgraph-cli[inmem]>=0.4.31",
     "pypdf>=6.21.3",
     "python-dotenv>=1.2.3",

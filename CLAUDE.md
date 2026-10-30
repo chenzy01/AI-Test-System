@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概览
 
-「kk AI测试平台」—— 基于 LangChain/LangGraph 的 AI 智能体系统，核心能力是让智能体解析需求/设计/接口文档，自动生成测试用例。
+「CZY AI测试平台」—— 基于 LangChain/LangGraph 的 AI 智能体系统，核心能力是让智能体解析需求/设计/接口文档，自动生成测试用例。
 
 - 后端：Python 3.12+，LangChain 1.x + LangGraph + DeepSeek（`deepseek-v4-flash`，多模态），用 uv 管理依赖（`pyproject.toml` / `uv.lock`）。
 - 文档解析：自定义 LangChain 中间件 `PdfParseMiddleware` 在模型调用前解析用户上传的文件（PDF/图片/文本/CSV/XLSX），走 PyMuPDF4LLM + 千问多模态模型，不再依赖 docling MCP。
@@ -114,6 +114,7 @@ yarn build    # next build
 
 - `examples/mcp/`：MCP 客户端/服务端三种传输方式（stdio/sse/http）示例；`mcp_server.py` 是 FastMCP SSE 服务。⚠️ `HTTP_demo.py` 硬编码了一个 Tavily API key（已失效），已加入 `.gitignore` 不提交。
 - `examples/doc_loader_example/`、`examples/langchain_demo/`：PDF 加载（PyMuPDF4LLM + 千问多模态解析图片）与 LangChain 基础用法示例；目录下的 `.pdf` 是测试用需求文档样本。
+- `examples/langchain/doc_embedding/`：向量计算与检索示例。`dashscope_embedding_demo.py` 用阿里 DashScope `text-embedding-v4` 做向量化 + `RedisVectorStore`（`langchain_redis`）做相似度检索（`similarity_search_with_score`，`1-score` 得相似度）；`ollama_embedding_demo.py` 用本地 Ollama `nomic-embed-text` 做向量化（`embed_query` / `embed_documents`，768 维）。
 - `examples/deepagents_demo/`：`deep_demo.py` 用 `create_deep_agent` + `FilesystemBackend`（`virtual_mode=True`）挂载 `skills/` 目录；其 `skills/` 是 5 个**旧版**技能（用 `templates/` 目录，命名与 `src/skills` 新版也不同，勿混用）。
 - `examples/czy_prompt/`：开发中间件 / PDF 解析器时用的提示词（如 `PDF_middleware.md`），沉淀开发需求。
 - `tests/`：`test_file_parser.py`（解析入口，离线无网络）、`test_pdf_parse_middleware.py`（中间件，覆盖正常 / 缓存 / 异常降级 / 剥离 base64 / 多类型 / 字段兼容等 10 个用例）。

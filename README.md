@@ -1720,6 +1720,213 @@ Langchain 在 初始化时，在 \_module\_lookup 中定义了各种解析器，
 
 ![image\.png](图片和附件/image%2012.png)
 
+#### 切分
+
+问题：为什么要做切分成块 
+
+- 造成资源浪费：若不做切分，当文档保存到数据库中，做召回的时候有可能返回整个文档甚至超过整个整个文档，
+
+- token消耗高：会召回很多不需要的内容
+
+- 不做切分，内容太多，影响大模型判断
+
+切分方法
+
+- 指定字符，比如空格或换行符，看到空格就进行切分
+
+- 按markdown 标题切分
+
+- 按token数量
+
+- 递归文本切分
+
+- \.\.\.
+
+示例代码
+
+> from langchain\_text\_splitters import RecursiveCharacterTextSplitter
+> 
+> content = """
+> 
+> 1. **全链路追溯矩阵**：需求→测试点→用例→执行→报告→缺陷，一个 ID 贯穿到底。任何环节产物都能向前溯源、向后追踪 —— 这是保真的骨架。
+> 
+> 2. **黄金集回归基线（Golden Set）**：把人工确认真实正确的历史交付物沉淀成基线，每次新产出与基线比对结构 / 质量，防模型版本升级导致的质量退化。
+> 
+> 3. **双轨校验**：确定性校验（格式、ID 唯一性、数字对账 —— 用脚本，可断言）\+ 生成式校验（评审 Agent/LLM 裁判 —— 看语义质量），两类互补，确定性校验永远不能省。
+> 
+> 4. **分层人工在环（HITL）**：AI 自检 → 评审 Agent → 人工抽审（关键交付物全审、常规交付物抽审），每层职责明确，人工只审机器审不了的部分。
+> 
+> """
+> 
+> 递归文本分割器
+> 
+> text\_spliter = RecursiveCharacterTextSplitter\(chunk\_size=100, chunk\_overlap=30, length\_function=len\)
+> 
+> """
+> 
+> chunk\_size: 每个 chunk 的大小,最大是 100 个字符
+> 
+> chunk\_overlap: 两个 chunk 之间的重叠部分的大小
+> 
+> length\_function: 计算长度（chunk\_size、chunk\_overlap）的函数
+> 
+> """
+> 
+> split\_text = text\_spliter\.split\_text\(content\)
+> 
+> print\(type\(split\_text\), split\_text\)
+> 
+> 
+
+
+
+分割原理：源代码中 self\.\_separators = separators or \["\\n\\n", "\\n", " ", ""\]，即先按 "\\n\\n" 分割，如果分割后第一部分
+
+超过了100个字符，则继续对第一部分进行分割继续使用"\\n\\n"进行分割，如果 "\\n\\n" 不存在则按 "\\n" 分割，
+
+如果 "\\n" 也不存在则按 " " 分割，如果 " " 也不存在则按 "" 分割
+
+text\_spliter 类型是 list，里面存储多个文本块，chunk\_overlap 是 30 个字符
+
+![image\.png](图片和附件/image%207.png)
+
+> 转化为文档对象
+> 
+> split\_document = text\_spliter\.create\_documents\(split\_text\)
+> 
+> print\(type\(split\_document\), split\_document\)
+> 
+> 
+
+通过 create\_documents 都转为文档对象
+
+![image\.png](图片和附件/image%2013.png)
+
+![image\.png](图片和附件/image%2019.png)
+
+> 完整示例
+> 
+> from langchain\_community\.document\_loaders import TextLoader
+> 
+> from langchain\_text\_splitters import RecursiveCharacterTextSplitter
+> 
+> """加载文档"""
+> 
+> documents = TextLoader\('tester\.txt','utf\-8'\)\.load\(\)
+> 
+> """创建递归分割器"""
+> 
+> text\_spliter = RecursiveCharacterTextSplitter\(chunk\_size=100, chunk\_overlap=30, length\_function=len\)
+> 
+> """分割文档对象"""
+> 
+> spliter\_document = text\_spliter\.split\_documents\(documents\)
+> 
+> 
+
+#### 嵌入计算
+
+需要用到ollama部署嵌入模型
+
+Ollama 下载地址 https://ollama\.com/download/windows
+
+安装第三方库 langchain\-ollama
+
+使用阿里云百炼提供的嵌入模型  text\-embedding\-v4
+
+安装第三方库 langchain\-community、dashscope
+
+
+
+### LightRAG 平台
+
+RagAnything 是对 LightRAG 的进一步封装，增加了多模态识别和处理，两者的关系
+
+> LightRAG 是底层图 RAG 内核；RAGAnything 是基于 LightRAG 封装的多模态增强层（同一个团队 HKUDS 港大）
+> 
+> - RAGAnything 复用 LightRAG 的知识图谱、双层检索、存储、LLM 抽取逻辑；
+> 
+> - RAGAnything 额外增加文档解析（MinerU）、图 / 表 / 公式 / OCR 扫描件处理、VLM 增强查询；
+> 
+> - API 接口大部分兼容，所以你代码里依然会看到 `lightrag.types`
+> 
+> 
+
+使用 RagAnything 进行检索增强生成，RagAnything  仓库中有现成可直接使用的示例代码。RagAnything 计算生成的向量数据都是保存在本地。
+https://github\.com/hkuds/rag\-anything
+
+#### 嵌入计算
+
+![image\.png](图片和附件/image%201.png)
+
+将示例代码复制到本地，需要修改 7 个地方
+
+- Create RAGAnything configuration 中 parser="mineru" 改为 parser="docling" ，因为 mineru 比较消耗CPU资源
+
+![image\.png](图片和附件/image%2025.png)
+
+- Define LLM model function 中，把文本推理模型改为自己自己能调用的大模型，比如 qwen3\.7\-flash，主要该大模型要能支持 OpenAI beta\.parse 的`json_schema(strict)`模式；同时修改 api\_key和base\_url
+
+![image\.png](图片和附件/image%202.png)
+
+- Define vision model function for image processing 中，修改视觉大模型，同样修改模型名称、api\_key和base\_url（这里有个elif 分支，在这个分支中也是要修改，与上面的是同一个视觉大模型）
+
+![image\.png](图片和附件/image%2024.png)
+
+- Define embedding function 嵌入模型，同样修改 model、api\_key、base\_url
+
+![image\.png](图片和附件/image%2012.png)
+
+- Process a document 中，file\_path 字段输入文档路径
+
+![image\.png](图片和附件/image%2011.png)
+
+- Query the processed content 中输入问题
+
+![image\.png](图片和附件/image%208.png)
+
+文档召回结果
+
+
+![image\.png](图片和附件/image%206.png)
+
+原文
+
+
+![image\.png](图片和附件/image.png)
+
+可以看到，大模型在召回之前，对文档进一步进行了推理总结，输出结构化也清晰，表达内容基本一致
+
+踩坑问题：
+
+> #### 问题总结
+> 
+> **过程**：先用 deepseek\-v4\-flash，先是接口地址写错报 404；修正地址后又报 400，提示 response\_format 类型不可用；LLM 调用异常后，未关闭 VLM 增强分支，触发 prompt 为 None 的正则类型报错；切换为 qwen3\.7\-flash 后流程正常。 
+> 
+> **原因**：①deepseek 官网接口不支持 OpenAI beta\.parse 的`json_schema(strict)`模式，仅支持简单`json_object`；②开启 vlm\_enhanced，异常后 prompt 为空进入图片解析逻辑，产生次生报错。 
+> 
+> **解决措施**：①替换模型为 DashScope 的 qwen3\.7\-flash，原生支持`json_schema`，兼容 LightRAG 的 Pydantic parse 调用；
+> 
+> 
+
+#### 检索
+
+![image\.png](图片和附件/image%203.png)
+
+同样将示例代码复制到本地后，需要修改所有大模型名称，api\_key、base\_url，与嵌入计算中的大模型保持一致即可
+
+> 问题踩坑
+> 
+> embedding\_func=EmbeddingFunc \(embedding\_dim=3072,             max\_token\_size=8192,             func=partial \(                 openai\_embed\.func,                 model="text\-embedding\-3\-large",                 api\_key=api\_key,                 base\_url=base\_url,\) 
+> 当 embedding\_dim=3072 时会报错，但改为 1024 后执行正常，为什么会这样
+> 
+> 原因：
+> 
+> **`model="text-embedding-3-large"`**** 只是名字，实际后端是火山方舟的豆包向量模型，不是 OpenAI 原版；这个方舟 Endpoint 返回向量固定是 1024 维（或者你在方舟控制台 / 接口参数里开启了 dim=1024 降维），不是 3072**。 LightRAG 的 `EmbeddingFunc(embedding_dim=xxx)` 是**强校验**：它拿到向量后会校验数组长度，声明 3072，但 API 返回 len=1024 → 直接抛维度不匹配报错；改成 1024，校验通过，正常跑GitHub。
+> 
+> OpenAI 原生 `text-embedding-3-large` 确实原生 3072 维；但是**火山方舟只是兼容 OpenAI 协议，你填这个 model 名字只是走兼容入口，底层是豆包 embedding，不受 OpenAI 参数约束**，这是坑点
+> 
+> 
 
 
 
