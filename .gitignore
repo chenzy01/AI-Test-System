@@ -24,3 +24,6 @@ node_modules/
 
 # ==== docs,冗余文档 =====
 .docs/
+
+# ==== playwright-cli 运行产物 =====
+.playwright-cli/

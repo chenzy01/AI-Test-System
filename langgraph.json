@@ -9,6 +9,9 @@
     },
     "deep_agent": {
       "path": "./examples/deepagents_demo/deep_demo.py:agent"
+    },
+    "back_agent": {
+      "path": "./examples/backend_demo.py:backend_agent"
     }
   },
   "env": ".env"

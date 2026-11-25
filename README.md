@@ -1930,3 +1930,132 @@ https://github\.com/hkuds/rag\-anything
 
 
 
+#### 启动LightRAG 服务
+
+LightRAG\> lightrag\-server
+
+若是启动后，在上传文件时不成功，需要检查\.env 中的环境变量
+
+> / \# 单次Embedding请求严格限制为10条，匹配火山引擎接口上限
+> 
+> /  EMBEDDING\_BATCH\_NUM 的意思是一次性给embedding 塞入几条文本
+> 
+> EMBEDDING\_BATCH\_NUM=10  \(原本这个值是32，但使用其它嵌入模型，会收到其它模型限制
+> 
+> 
+
+
+
+前端进行编译（有改动前端的时候才需要编译，以及第一次下载代码的时候要编译）
+
+![Image](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/authcode/?code=MmYzY2JiMmRhNzhhY2VjOTFmMTVhYzEyNDljNWI0MTBfZmEzNjZmN2VhYTFiYzVmOWUyOTZlMTc0ZTQzNjYwYTdfSUQ6NzcwODMyMjA2MTI1Njg1NDc4NF8xNzk1NjIyNzU2OjE3OTU3MDkxNTZfVjM)
+
+启动前端
+
+> bun run dev
+> 
+> 
+
+
+
+#### LightRAG 几种查询方式的区别：Mix,Hybrid,Naive,Local,Global,Bypass
+
+Bypass：直接使用大模型回答，没有经过知识图谱，向量检索等手段
+
+Naive：标准的向量数据库检索，仅基于文本分块做向量相似度召回，未有使用到知识图谱
+
+Local：使用知识图谱做局部精准查询召回，适用于答案明确的查询
+
+Global：使用知识图谱进行全局搜索，范围广、关联内容多，支持链式推理，不像Local 那么精准
+
+Hybrid：介于Local 与 Clobal 之间，使用知识图谱召回具体细节与全局上下文关系，未用到向量检索。
+
+Mix：LightRAG 的**默认模式**，融合 local \+ global \+ naive 三路检索结果，即 “知识图谱双路检索 \+ 纯向量文本检索” 三者合并
+
+
+
+支持多模态模型的RAG 进行检索，两种方式
+
+- 基于raganything 进行二次开发，但开发量会比较大
+
+- 基于lightrag 进行二次开发，先把raganything 融合进去，能够支持多模态识别，再二开。lightrag 有文档、有接口、有前端，很多东西都具备，缺点就是不支持多模态
+
+
+
+RAG 需要支持多模态识别，需要的几种数据库
+
+- 向量数据库\+嵌入式模型
+
+- 视觉模型
+
+- 文本解析大模型
+
+- Postgre 数据库
+
+- 图数据库 neo4j
+
+- 
+
+
+
+## UI自动化
+
+Playwright 
+
+Midsence\.js \+ 视觉模型
+
+通过视觉模型识别 \-\-\> 生成脚本
+
+运行脚本 \-\-\> 依赖视觉模型解析
+
+不足：
+
+1. token消耗大，成本高
+
+2. 耗时可能比较长
+
+3. 识别不稳定
+
+
+
+Playwright Cli
+
+Playwright Cli 封装了一套完善的通过命令驱动执行事件的方法，这些技能存放在skill 中，发给大模型的只有excute 工具，大模型根据命令指示，去skill 加载对应的Cli\(按需加载\)，然后使用excute 执行具体的动作
+
+
+
+要使用到 LangChain 的LocalShellBackend \(给智能体使用的拥有超级管理员权限的本地命令行终端\+文件管理器）
+
+一段简单的示例代码，利用 cli 创建文件
+
+> from deepagents import create\_deep\_agent
+> 
+> from deepagents\.backends import LocalShellBackend
+> 
+> from core\.llms import ds\_llm
+> 
+> 
+> 
+> backend\_agent = create\_deep\_agent\(
+> 
+> model= ds\_llm,
+> 
+> backend=LocalShellBackend\(root\_dir="D:\\\\PycharmProjects\\\\czy\-ai\-system\\\\examples",
+> 
+> virtual\_mode=True\),
+> 
+> \)
+> 
+> 
+
+图中可以看到，调用了 execute 工具
+
+![Image](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/authcode/?code=MmY1NzMwNzkxMDU3NjlmYjkyYTI1YjM2ZTk2ZTE0NzdfNGRlZDU2MDRhZGI3NDdmOTQzNGE0YzYzNjFiMGRjNTJfSUQ6NzcwOTkwNzI0NzQ4MDA5ODA1NF8xNzk1NjIyNzU2OjE3OTU3MDkxNTZfVjM)
+
+
+
+https://github\.com/microsoft/playwright\-cli/tree/main\#playwright\-cli\-vs\-playwright\-mcp
+
+
+
+
